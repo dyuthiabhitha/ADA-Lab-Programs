@@ -1,0 +1,56 @@
+#include<stdio.h>
+#include<time.h>
+void msort(int a[], int i, int j);
+void m(int a[], int i1, int j1, int i2, int j2);
+int main()
+{
+   int a[200], n, i;
+   float total;
+   clock_t start_t,end_t;
+   printf("Enter the number of elements: \n");
+   scanf("%d", &n);
+   printf("Enter the array elements: \n");
+   for(i=0; i<n; i++)
+      scanf("%d", &a[i]);
+      msort(a, 0, n-1);
+      printf("\n The sorted array is: \n");
+      start_t=clock();
+   for(i=0; i<n; i++)
+      printf("%d ",a[i]);
+   end_t=clock();
+   total=(float)(end_t-start_t);
+   printf("\n Time taken: %f seconds\n",total);
+   return 0;
+}
+void msort(int a[],int i,int j)
+{
+   int x;
+   if(i<j)
+   {
+       x=(i+j)/2;
+       msort(a, i, x); 
+       msort(a, x+1, j); 
+       m(a, i, x, x+1, j);
+   }
+}
+void m(int a[], int i1, int j1, int i2, int j2)
+{
+   int temp[200]; 
+   int i, j, k;
+   i=i1; 
+   j=i2; 
+   k=0;
+   while(i<=j1 && j<=j2) 
+   {
+      if(a[i]<a[j])
+      temp[k++]=a[i++];
+      else
+      temp[k++]=a[j++];
+   }
+   while(i<=j1) 
+   temp[k++]=a[i++];
+   while(j<=j2)
+   temp[k++]=a[j++];
+   for(i=i1, j=0; i<=j2; i++, j++)
+   a[i]=temp[j];
+}

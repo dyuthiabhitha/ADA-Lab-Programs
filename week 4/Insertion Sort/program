@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <time.h>
+int main()
+{
+  int n, arr[50], a, b, m, flag=0;
+  float total;
+  clock_t start_t,end_t;
+  printf("Enter the number of elements: \n");
+  scanf("%d", &n);
+  printf("Enter %d integers: \n", n);
+  for (a=0; a<n; a++)
+  scanf("%d", &arr[a]);
+  start_t=clock();
+  for (a=1; a<=n-1; a++)
+  {
+    m=arr[a];
+    for (b=a-1; b>=0; b--)
+    {
+      if (arr[b]>m)
+      {
+        arr[b+1]=arr[b];
+        flag=1;
+      }
+      else
+      break;
+    }
+    if (flag)
+    arr[b+1]=m;   
+  }
+  end_t=clock();
+  total=(float)(end_t-start_t);
+  printf("Time taken: %f seconds \n",total);
+  printf("The sorted list in ascending order is:\n");
+  for (a=0; a<=n-1; a++)
+  {
+    printf("%d \n", arr[a]);
+  }
+  return 0;
+}
